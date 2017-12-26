@@ -1,0 +1,8 @@
+Resources:
+  myCacheCluster:
+    Type: "AWS::ElastiCache::CacheCluster"
+    Properties:
+      AZMode: "cross-az"
+      CacheNodeType: "cache.m3.medium"
+      Engine: "redis"
+      NumCacheNodes: "3"
