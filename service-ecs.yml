@@ -28,10 +28,8 @@ Resources:
   ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
     Properties:
-      AZMode: "cross-az"
       CacheNodeType: "cache.m3.medium"
       Engine: "redis"
-      NumCacheNodes: "2"
       CacheSubnetGroupName: 
         Ref: ElasticacheSubnetGroup
       VpcSecurityGroupIds:
