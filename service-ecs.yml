@@ -6,7 +6,7 @@ Resources:
       SubnetIds:
         Fn::Split:
           - ","
-          - !Ref InstanceSubnetIds
+          - Fn::ImportValue: !Sub ${ServiceSubnetIds}
 
   ElasticacheSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
@@ -30,6 +30,4 @@ Resources:
       NumCacheNodes: "1"
       CacheSubnetGroupName: !Ref ElasticacheSubnetGroup
       VpcSecurityGroupIds:
-        Fn::Split:
-          - ","
-          - !Ref InstanceSubnetIds
+        - Fn::ImportValue: !Sub ${ServiceSecurityGroup}
