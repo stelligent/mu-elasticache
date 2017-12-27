@@ -27,7 +27,7 @@ Resources:
           - Action:
             - iam:CreateServiceLinkedRole
             - iam:PutRolePolicy
-    			  Resource: arn:aws:iam::*:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache*
+    			  Resource: 'arn:aws:iam::*:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache*'
             Condition:
               StringLike:
                 iam:AWSServiceName: elasticache.amazonaws.com
