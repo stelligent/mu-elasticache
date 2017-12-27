@@ -6,7 +6,7 @@ Resources:
       SubnetIds:
         Fn::Split:
           - ","
-          - Fn::ImportValue: !Sub ${ServiceSubnetIds}
+          - Fn::ImportValue: mu-vpc-roadmap-dev-InstanceSubnetIds
 
   ElasticacheSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
@@ -19,7 +19,7 @@ Resources:
           FromPort: "6379"
           ToPort: "6379"
           SourceSecurityGroupId:
-            - Fn::ImportValue: !Sub ${ServiceSecurityGroup}
+            - Fn::ImportValue: mu-vpc-roadmap-dev-InstanceSubnetIds
 
   ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
@@ -32,4 +32,5 @@ Resources:
       VpcSecurityGroupIds:
         Fn::Split:
           - ","
-          - Fn::ImportValue: !Sub ${ServiceSubnetIds}
+          - Fn::ImportValue: mu-vpc-roadmap-dev-InstanceSubnetIds
+
