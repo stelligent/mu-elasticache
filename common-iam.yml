@@ -24,3 +24,11 @@ Resources:
             - elasticache:RevokeCacheSecurityGroupIngress
             Resource: '*'
             Effect: Allow
+          - Action:
+            - iam:CreateServiceLinkedRole
+            - iam:PutRolePolicy
+    			  Resource: arn:aws:iam::*:role/aws-service-role/elasticache.amazonaws.com/AWSServiceRoleForElastiCache*
+            Condition:
+              StringLike:
+                iam:AWSServiceName: elasticache.amazonaws.com
+            Effect: Allow

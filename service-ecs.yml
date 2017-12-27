@@ -14,7 +14,8 @@ Resources:
     Properties:
       GroupDescription: "Elasticache Security Group"
       VpcId: 
-        Ref: VpcId
+        Fn::ImportValue: 
+          Ref: VpcId
       SecurityGroupIngress:
         -
           IpProtocol: "tcp"
