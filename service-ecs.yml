@@ -21,7 +21,7 @@ Resources:
           SourceSecurityGroupId:
             - Fn::ImportValue: !Sub ${ServiceSecurityGroup}
 
-    ElasticacheCluster:
+  ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
     Properties:
       AZMode: "cross-az"
