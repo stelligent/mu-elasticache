@@ -31,7 +31,7 @@ Resources:
       AZMode: "cross-az"
       CacheNodeType: "cache.m3.medium"
       Engine: "redis"
-      NumCacheNodes: "1"
+      NumCacheNodes: "2"
       CacheSubnetGroupName: 
         Ref: ElasticacheSubnetGroup
       VpcSecurityGroupIds:
