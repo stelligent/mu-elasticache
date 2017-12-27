@@ -7,7 +7,7 @@ Resources:
         Fn::Split:
           - ","
           - Fn::ImportValue: 
-              Fn::Sub: "${ServiceSubnetIds}"
+              Ref: ServiceSubnetIds
 
   ElasticacheSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
@@ -22,7 +22,7 @@ Resources:
           ToPort: "6379"
           SourceSecurityGroupId:
             - Fn::ImportValue: 
-                Fn::Sub: "${ServiceSecurityGroup}"
+                Ref: ServiceSecurityGroup
 
   ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
@@ -35,4 +35,4 @@ Resources:
         Ref: ElasticacheSubnetGroup
       VpcSecurityGroupIds:
         - Fn::ImportValue: 
-            Fn::Sub "${ServiceSecurityGroup}"
+            Ref: ServiceSecurityGroup
