@@ -1,8 +1,35 @@
 Resources:
-  myCacheCluster:
+  ElasticacheSubnetGroup:
+    Type: "AWS::ElastiCache::SubnetGroup"
+    Properties:
+      Description: "Elasticache Subnet Group Name"
+      SubnetIds:
+        Fn::Split:
+          - ","
+          - Fn::ImportValue: !Sub ${ServiceSubnetIds}
+
+  ElasticacheSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "Elasticache Security Group"
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        -
+          IpProtocol: "tcp"
+          FromPort: "6379"
+          ToPort: "6379"
+          SourceSecurityGroupId:
+            - Fn::ImportValue: !Sub ${ServiceSecurityGroup}
+
+    ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
     Properties:
       AZMode: "cross-az"
       CacheNodeType: "cache.m3.medium"
       Engine: "redis"
-      NumCacheNodes: "3"
+      NumCacheNodes: "1"
+      CacheSubnetGroupName: !Ref ElasticacheSubnetGroup
+      VpcSecurityGroupIds:
+        Fn::Split:
+          - ","
+          - Fn::ImportValue: !Sub ${ServiceSubnetIds}
