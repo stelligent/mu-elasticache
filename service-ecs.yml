@@ -30,6 +30,7 @@ Resources:
     Properties:
       CacheNodeType: "cache.m3.medium"
       Engine: "redis"
+      NumCacheNodes: "1"
       CacheSubnetGroupName: 
         Ref: ElasticacheSubnetGroup
       VpcSecurityGroupIds:
