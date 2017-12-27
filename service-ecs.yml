@@ -21,8 +21,8 @@ Resources:
           FromPort: "6379"
           ToPort: "6379"
           SourceSecurityGroupId:
-            - Fn::ImportValue: 
-                Ref: ServiceSecurityGroup
+            Fn::ImportValue: 
+              Ref: ServiceSecurityGroup
 
   ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
