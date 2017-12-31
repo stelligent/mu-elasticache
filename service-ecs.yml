@@ -1,3 +1,7 @@
+Parameters:
+  NumCacheNodes:
+    Type: String
+    Description: Number of cache nodes
 Resources:
   ElasticacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
@@ -6,15 +10,15 @@ Resources:
       SubnetIds:
         Fn::Split:
           - ","
-          - Fn::ImportValue: 
+          - Fn::ImportValue:
               Ref: ServiceSubnetIds
 
   ElasticacheSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupDescription: "Elasticache Security Group"
-      VpcId: 
-        Fn::ImportValue: 
+      VpcId:
+        Fn::ImportValue:
           Ref: VpcId
       SecurityGroupIngress:
         -
@@ -22,7 +26,7 @@ Resources:
           FromPort: "6379"
           ToPort: "6379"
           SourceSecurityGroupId:
-            Fn::ImportValue: 
+            Fn::ImportValue:
               Ref: ServiceSecurityGroup
 
   ElasticacheCluster:
@@ -30,9 +34,10 @@ Resources:
     Properties:
       CacheNodeType: "cache.m3.medium"
       Engine: "redis"
-      NumCacheNodes: "1"
-      CacheSubnetGroupName: 
+      NumCacheNodes:
+        Ref: NumCacheNodes
+      CacheSubnetGroupName:
         Ref: ElasticacheSubnetGroup
       VpcSecurityGroupIds:
-        - Fn::ImportValue: 
+        - Fn::ImportValue:
             Ref: ServiceSecurityGroup
