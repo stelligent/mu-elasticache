@@ -2,6 +2,7 @@ Parameters:
   NumCacheNodes:
     Type: String
     Description: Number of cache nodes
+    Default: 1
 Resources:
   ElasticacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
