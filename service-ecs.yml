@@ -3,6 +3,47 @@ Parameters:
     Type: String
     Description: Number of cache nodes
     Default: 1
+  CacheNodeType:
+    Type: String
+    Description: The compute and memory capacity of the node(s) in the Redis Cluster
+    Default: "cache.m3.medium"
+    AllowedValues:
+      - cache.t2.micro
+      - cache.t2.small
+      - cache.t2.medium
+      - cache.m5.24xlarge
+      - cache.m5.large
+      - cache.m5.xlarge
+      - cache.m5.2xlarge
+      - cache.m5.4xlarge
+      - cache.m5.12xlarge
+      - cache.m4.large
+      - cache.m4.xlarge
+      - cache.m4.2xlarge
+      - cache.m4.4xlarge
+      - cache.m4.10xlarge
+      - cache.m3.medium
+      - cache.m3.large
+      - cache.m3.xlarge
+      - cache.m3.2xlarge
+      - cache.r5.24xlarge
+      - cache.r5.large
+      - cache.r5.xlarge
+      - cache.r5.2xlarge
+      - cache.r5.4xlarge
+      - cache.r5.12xlarge
+      - cache.r4.large
+      - cache.r4.xlarge
+      - cache.r4.2xlarge
+      - cache.r4.4xlarge
+      - cache.r4.8xlarge
+      - cache.r4.16xlarge
+      - cache.r3.large
+      - cache.r3.xlarge
+      - cache.r3.2xlarge
+      - cache.r3.4xlarge
+      - cache.r3.8xlarge
+
 Resources:
   ElasticacheSubnetGroup:
     Type: "AWS::ElastiCache::SubnetGroup"
@@ -33,8 +74,9 @@ Resources:
   ElasticacheCluster:
     Type: "AWS::ElastiCache::CacheCluster"
     Properties:
-      CacheNodeType: "cache.m3.medium"
       Engine: "redis"
+      CacheNodeType:
+        Ref: CacheNodeType
       NumCacheNodes:
         Ref: NumCacheNodes
       CacheSubnetGroupName:
